@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 
-import { UserController } from './users/user.controller';
 import { MongooseModule } from '@nestjs/mongoose/dist';
 
 import { taskSchema, Task } from './schema/task.model';
@@ -21,7 +20,7 @@ import { userSchema, User } from './schema/user.model';
       { name: User.name, schema: userSchema },
     ]),
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -8,5 +8,4 @@ export class CreateUserDto {
   email: string;
   @IsNotEmpty()
   password: string;
-  task: [];
 }
