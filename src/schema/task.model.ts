@@ -10,7 +10,7 @@ export class Task {
   content: string;
 
   @Prop({ required: true })
-  img: string;
+  imgRef: string;
 
   @Prop({ required: true, ref: 'User' })
   userId: Types.ObjectId;
