@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { CreateUserDto, UpdateUserDto } from 'src/dto';
-import { User, userDocument } from '../../schema/user.model';
+import { CreateUserDto, UpdateUserDto } from '../auth/dto';
+import { User, userDocument } from '../schema/user.model';
 
 @Injectable()
 export class UserService {
@@ -13,16 +13,20 @@ export class UserService {
     return newUser.save();
   }
 
-  async findAll(limit: number, page: number): Promise<User[]> {
+  async findAll(page: number, limit: number): Promise<User[]> {
     return await this.userModel
-      .find()
-      .limit(limit)
+      .find({})
       .skip((page - 1) * limit)
+      .limit(limit)
       .exec();
   }
 
   async find(id: Types.ObjectId): Promise<User> {
     return this.userModel.findById(id).exec();
+  }
+
+  async findByEmail(email: string): Promise<userDocument> {
+    return this.userModel.findOne({ email }).exec();
   }
 
   async update(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
