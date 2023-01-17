@@ -1,12 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Post, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUserDto } from './dto';
+import { CreateUserDto } from '../user/dto';
 import { AuthDto } from './dto';
+import { JwtGuard } from './guard';
+import { User } from './dercorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   async login(@Body() authDto: AuthDto) {
@@ -18,6 +20,7 @@ export class AuthController {
     return this.authService.signUp(createUserDtoo);
   }
 
+  @UseGuards(JwtGuard)
   @Get()
   async getAll() {
     return this.authService.test();

@@ -7,7 +7,9 @@ import { Task, taskDocument } from 'src/schema/task.model';
 
 @Injectable()
 export class TaskService {
-  constructor(@InjectModel(Task.name) private taskModel: Model<taskDocument>) {}
+  constructor(
+    @InjectModel(Task.name) private readonly taskModel: Model<taskDocument>,
+  ) {}
 
   async findAll(limit: number, page: number): Promise<Task[]> {
     return await this.taskModel

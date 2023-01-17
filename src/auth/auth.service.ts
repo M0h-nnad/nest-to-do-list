@@ -4,7 +4,8 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AuthDto, CreateUserDto } from '../auth/dto';
+import { AuthDto } from '../auth/dto';
+import { CreateUserDto } from '../user/dto';
 import * as argon from 'argon2';
 import { UserService } from '../user/user.service';
 import { MongoServerError } from 'mongodb';
@@ -51,10 +52,9 @@ export class AuthService {
 
   async test() {
     try {
-      const users = await (this.userService.findAll(1, 10) as any);
+      const users = await this.userService.findAll(1, 10);
       return users;
     } catch (e) {
-      console.log(e);
       return e;
     }
   }

@@ -3,7 +3,7 @@ import { UserService } from 'src/user/user.service';
 
 @Controller()
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
   @Get()
   async getUsers(@Param() params, @Res() res) {
     try {
