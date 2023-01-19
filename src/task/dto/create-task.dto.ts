@@ -8,7 +8,5 @@ export class CreateTaskDto {
   @MaxLength(100)
   content: string;
 
-  @IsNotEmpty()
-  userId: string;
   imgRef: string;
 }

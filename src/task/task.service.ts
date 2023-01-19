@@ -23,8 +23,8 @@ export class TaskService {
     return await this.taskModel.findById(id);
   }
 
-  async create(createTaskDto: CreateTaskDto): Promise<Task> {
-    const newTask = await new this.taskModel(createTaskDto);
+  async create(userId, createTaskDto: CreateTaskDto): Promise<Task> {
+    const newTask = await new this.taskModel({ userId, ...createTaskDto });
     return newTask.save();
   }
 
@@ -46,6 +46,14 @@ export class TaskService {
     const existingTask = await this.taskModel.findByIdAndDelete(id);
 
     if (!existingTask) throw new NotFoundException(`Task #${id} is not Found`);
+
+    return existingTask;
+  }
+
+  async findUserTasks(userId) {
+    const existingTask = await this.taskModel.find({ userId: userId }).exec();
+
+    if (!existingTask) throw new NotFoundException(`Task  is not Found`);
 
     return existingTask;
   }

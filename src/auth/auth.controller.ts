@@ -4,7 +4,6 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from '../user/dto';
 import { AuthDto } from './dto';
 import { JwtGuard } from './guard';
-import { User } from './dercorator';
 
 @Controller('auth')
 export class AuthController {

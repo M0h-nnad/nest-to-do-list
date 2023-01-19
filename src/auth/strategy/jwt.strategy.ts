@@ -20,8 +20,6 @@ export class JwtStartegy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    const user = await this.userModel.findById(payload.id);
-    console.log(user);
-    return user;
+    return payload;
   }
 }

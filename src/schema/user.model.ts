@@ -14,6 +14,11 @@ import { HydratedDocument } from 'mongoose';
     },
   },
   toObject: { versionKey: false },
+  query: {
+    byEmail(email: string) {
+      return this.findOne({ email });
+    },
+  },
 })
 export class User {
   @Prop({ required: true })
