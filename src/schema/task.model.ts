@@ -1,7 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 
-@Schema({ timestamps: true })
+@Schema({
+  timestamps: true,
+  id: true,
+  toJSON: {
+    versionKey: false,
+    virtuals: true,
+    transform(doc, ret, options) {
+      delete ret._id;
+      return ret;
+    },
+  },
+})
 export class Task {
   @Prop({ required: true })
   title: string;
